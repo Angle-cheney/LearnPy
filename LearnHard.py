@@ -433,7 +433,7 @@ for i in range(5):  #代表外循环要执行5次
 	print()
 	
 '''
-#45.为什么需要列表
+#45.为什么需要列表，有序序列
 '''
 a = 10 #变量存储的是一个对象的引用
 lst = ['hello','world',99]
@@ -486,3 +486,299 @@ print('切的片段：',id(lst2))
 print(lst[1:6])
 print(lst[1:6:])
 print(lst[1:6:2])
+
+#51.列表元素的判断和遍历
+print('p' in 'python')
+print('p' not in 'python')
+
+lst = [10,20,'python','hello']
+print(10 in lst)
+print(100 not in lst)
+
+for i in lst:
+	print(True)
+	
+	
+#52.列表元素的添加操作
+'''向列表中添加一个元素
+append()在列表末尾添加元素
+extend()在列表末尾至少添加一个元素
+insert()在列表任意位置添加一个元素
+切片，在列表的任意添加至少一个元素'''
+ls = [10,20,30]
+ls.append(12)
+ls1=['hello']
+ls.extend(ls1)
+ls.insert(10,999)
+print(ls)
+
+ls2=[True,False,'hello'] #切掉
+ls[1:]=ls2
+print(ls)
+
+#53.列表元素的删除操作
+'''
+1.remove()从列表移除一个元素，如果右重复元素只移除第一个
+2.pop()根据索引移除元素，如果指定索引位置不存在，将抛出异常
+3.切片，删除至少一个元素，将产生一个新的列表对象
+4.clear()清除列表中的所有元素
+5.del()语句，将列表删除
+
+a = [10,20,30,30,40]
+#a.remove(30)从列表移除一个元素，如果右重复元素只移除第一个
+#a.pop(1)根据索引移除元素
+#a.pop()如果不指定参数，将删除列表中的最后一个元素
+#aa = a[1:3]
+#a[1:3]=[]
+#a.clear()清除列表中的所有元素
+print(a)
+'''
+
+
+#54.修改元素的修改操作
+a = [10,20,30,30,40]
+#一次修改一个值
+a[2]=100
+print(a)
+#修改列表多个值
+a[1:3]=[300,400,500]
+print(a)
+
+
+#55.列表的排序操作
+#1.开始排序，调用列表对象的sort方法， 升序排序
+b = [102,20,330,3,40]
+print('排序前的列表',b)
+b.sort()
+print('排序后的列表',b)
+#2.通过指定关键字参数，将列表中的元素进行降序排序
+b.sort(reverse=True)#reverse=ture表示降序排序，=false表示升序排序
+print(b)
+#3.使用内置函数sorted()对列表进行排序，经产生一个新的列表对象
+c = [102,20,330,3,40]
+cc=sorted(c)
+print(cc)
+
+#56.列表生成式
+d=[i*i for i in range(1,10)]
+print(d)
+#列表中元素值为2，4，6，8，10
+e = [i*2 for i in range(1,6)]
+print(e)
+
+
+#57.什么是字典
+#字典是python内置的数据结构之一，与列表一样是一个可变序列
+#以键值对的方式存储数据，字典是一个无序的序列{'张三':'11'}
+
+#58.字典的实现原理
+#字典的实现原理与查字典类似，查字典是现根据部首或拼音查找对于的页码
+#python中的字典根据key查找values所在的位置
+
+#59.字典的创建
+score={'city':'上海','name':'阿修罗'}
+print(type(score))
+dict1=dict(name='阿修罗',age=20)
+print(dict1)
+
+#60.字典的元素获取
+#1.第一种，使用[]，查找的键不存在，会报错
+sc={'city':'上海','name':'阿修罗'}
+#print(sc['city'])
+#print(sc['jjj'])
+#2.第二种，使用get()，查找的键存在，不会报错
+print(sc.get('name'))
+print(sc.get('急急急'))
+print(sc.get('急',222))
+
+#61.字典元素的增删改操作
+#1.key的判断
+scr={'city':'上海','name':'阿修罗'}
+print('张三' in scr)
+print('张三' not in scr)
+#2.del字典元素的删除,删除指定的键值对
+del scr['city']
+print(scr)
+#3.clear清空字典所有的键值对
+#scr.clear()
+#print(scr)
+#4.新增元素
+scr['李四']=90
+print(scr)
+#5.修改元素
+scr['李四']=100
+print(scr)
+
+#62.获取字典视图
+#1.keys()获取字典所有的key
+skr={'city':'上海','name':'阿修罗'}
+keys = skr.keys()
+print(keys)
+print(type(keys))
+print(list(keys))
+#2.values()获取字典中所有values
+values = skr.values()
+print(values)
+print(type(values))
+print(list(values))
+#3.items()获取字典中所有的key,values对
+items = skr.items()
+print(items)
+print(list(items))#转换之后的列表元素是由元组组成的
+
+
+#63.字典元素的遍历
+for item in skr:
+	print(item,skr[item],skr.get(item))
+	
+
+#64.字典的特点
+#1.字典所有元素都是一个key-values对，key不允许重复，values允许重复
+#2.字典中元素是无序的
+#3.字典中的key必须是不可变的对象
+#4.字典也可以根据需要动态的伸缩
+#5.字典浪费较大的内存，是一种使用空间换时间的数据结构
+l = {'name':'张三','name':'李四'} #key不允许重复
+print(l)
+l = {'name':'张三','namelick':'李四'} #values允许重复
+print(l)
+
+#65.字典的生成式
+#内置函数Zip()：用于将可迭代的对象作为参数，将对象中对应的元素打包成一个元组，
+#然后返回由这些元组组成的列表
+
+ite=['names','lights','Book']
+prices=[90,34,23]
+k={ite.upper():prices  for ite,prices in zip(ite,prices)}
+print(k)
+
+#66.什么是元组
+#Python内置的数据结构之一，是一个不可变的序列
+'''
+不可变与可变序列
+不可变序列：字符串，元组：没有增删改操作
+可变序列：列表，字典：可以对序列进行增删改，对象地址不发生更改
+'''
+#可变序列：列表，字典
+lis=[10,20,30]
+print(id(lis))
+lis.append(300)
+print(id(lis))
+#不可变序列:字符串，元组
+s = 'hello'
+print(id(s))
+s=s+'word'
+print(id(s))
+
+#67.元组的创建方式
+#1.使用(),只有一个元素的时候，必须加上,逗号
+t = ('python','world',98)
+print(t)
+print(type(t))
+#2.使用内置函数tuple()
+t1=tuple(('python','world',98))
+print(t1)
+print(type(t1))
+
+#68.为什么要将元组设计成不可变序列
+'''
+1.在多任务环境下，同时操作对象是不需要加锁，因此，在程序中尽量使用不可变序列
+注意：如果元组中对象本身是不可变对象，则不能再引用其他对象
+注意：如果元组中对象是可变对象，则可变对象的引用不可以改变，单数据可以改变
+'''
+
+#69.元组的遍历
+t=('python','world',98)
+'''第一种获取元素的方式：索引'''
+print(t[0])
+print(t[1])
+print(t[2])
+'''遍历元组'''
+for i in t:
+	print(i)
+	
+#70.集合的概述与创建
+'''
+python语言提供内置数据结构
+与列表，字典一样属于可变类型的序列
+集合没有values的字段
+'''
+#集合的直接创建
+#1.使用{}直接创建
+a={1,2,3,5,66,66,5} #集合中的元素不允许重复
+print(a)
+#2.使用内置函数set()
+a1=set(range(6))
+print(a1,type(a1))
+a2=set([1,2,3,5,66,66,5])
+print(a2)
+a3=set('python')
+print(a3,type(a3))
+a4=set({1,2,3,5,66,66,5})
+print(a,type(a4))
+a5=set({})
+print(a5,type(a5))
+
+#71.集合的相关操作
+'''
+集合元素的判断操作：in not in
+集合元素的新增操作：add()一次添加一个    update()至少添加一个
+集合元素的删除操作：remove()一次删除一个指定元素，若不存在，抛出keyError异常
+				discard()一次删除一个指定元素，若不存在，不抛出异常
+				pop()一次只删除一个任意元素
+				clear()清空集合
+'''
+'''
+b={1,2,3,5,66,66,5}
+print(2 in b)
+print(2 not in b)
+b.add(100)
+print(b)
+b1={1,2,3,5,66,66,5}
+b1.remove(111)
+b1.discard(33)
+b1.pop()
+'''
+b2={1,2,3,5,66,66,5}
+b2.clear()
+print(b2)
+
+#72.集合之间的关系
+#1.两个集合是否相等
+v={1,23,4}
+v1={2,13,4}
+print(v==v1)
+print(v!=v1)
+#2.一个集合是否是另一个集合的子集
+b={1,2,3}
+b1={1,2,3,4,5,6}
+print(b.issubset(b1))
+print(b1.issubset(b))
+#3.一个集合是否为另一个集合的超集
+print(b.issuperset(b1))
+#4.两个集合是否存在交集
+print(b.isdisjoint(b1)) #有交集为false  无交集为true
+
+
+#73.集合的数据操作
+#集合的数学操作
+#1.交集
+a={10,20,30}
+a1={10,23,4}
+print(a1.intersection(a))
+#2.并集操作
+print(a1.union(a)) #union和|等价
+print(a1|a)
+#3.差集操作
+print(a1.difference(a))
+print(a1-a)
+#4.对称差集
+print(a1.symmetric_difference(a))
+
+#74.集合生成式
+#列表生成式
+w=[i*i for i in range(6)]
+print(w)
+#集合生成式
+w1={i*i for i in range(6)}
+print(w1)

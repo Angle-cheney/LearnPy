@@ -762,6 +762,7 @@ print(b.isdisjoint(b1)) #有交集为false  无交集为true
 
 #73.集合的数据操作
 #集合的数学操作
+'''
 #1.交集
 a={10,20,30}
 a1={10,23,4}
@@ -782,3 +783,68 @@ print(w)
 #集合生成式
 w1={i*i for i in range(6)}
 print(w1)
+'''
+#75.字符串的创建和驻留机制
+#python中字符串是基本数据类型，是不可变的字符序列
+'''
+驻留机制的几种交互模式
+1.字符串长度为0或1的时候
+2.符合标识符的字符串
+3.字符串旨在编译时进行驻留，而非运行时
+4.【-5,256】之间的整数数字
+优点：当需要值相同的字符串时，可以直接从字符串池里拿来使用，避免频繁创建和销毁，提升效率节约内存池
+x= 'python'
+y = "python"
+print(x,id(x))
+print(y,id(y))
+'''
+
+
+#76.字符串的常用操作_字符串的查询
+'''
+1.index()查找子串substr第一次出现的位置，如果查不到，抛出异常valuesError
+2.rindex()查找子传substr最后一次出现的位置，如果查不到，抛出异常valesError
+3.find()查找子串substr第一次出现的位置，如果不存在，则返回-1
+4.efind()查找子串substr最后一次出现的位置，如果不存在，则返回-1
+
+
+s='hello,hello'
+print(s.index('lo'))#3
+print(s.find('lo'))#3
+print(s.rindex('l0'))#9
+print(s.rfind('lo'))#9
+print(s.find('k'))
+'''
+#77.字符串的常用操作_字符串大小写转换
+'''
+upper()把字符串所有字符都转换成大写字母
+lower()把字符串所有字符都转换成小写字母
+swapcase()把大小转化成小写，小写转换成大写
+capitalize()第一个字符转化为大写，其余字符为小写
+tittle()把每个单词的第一个字符转化成大写，每个单词剩余字符转化为小写
+
+k ='hello,python'
+k1=k.upper()
+k2=k.lower()
+k3=k.swapcase()
+k4=k.capitalize()
+k5=k.title()
+print(k1)
+print(k2)
+print(k3)
+print(k4)
+print(k5)
+'''
+
+#78.字符串的常用操作_字符串内容对齐操作的方法
+'''
+center()居中对齐，第一个参数指定宽度，第二个参数指定填充符
+ljust()左对齐，第一个参数指定宽度，第二个参数指定填充符
+rjust()右对齐，第一个参数指定宽度，第二个参数指定填充符
+zfill()右对齐，左边用0填充
+'''
+m='hello,worldHard'
+print(m.center(20,'*'))
+print(m.ljust(20,'*'))
+print(m.rjust(20,'*'))
+print(m.zfill(20,'*'))

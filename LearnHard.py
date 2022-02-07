@@ -415,15 +415,15 @@ for i in range(3): #行数，一次是一行
 		print('*',end='\t') #不换行输出
 	print()
 
-'''依次打印每行多一个'''
+'''依次打印每行多一个
 for i in range(9):
 	for j in range(1,i+1):
 		print(i,'*',j,'=',i*j,end='\t')
 	print()
-
+'''
 
 #44.二重循环中的Break和continue
-'''流程控制break与continue再二重循环中的使用'''
+'''流程控制break与continue再二重循环中的使用
 for i in range(5):  #代表外循环要执行5次
 	for j in range(1,11):
 		if j%2 ==0:
@@ -432,5 +432,57 @@ for i in range(5):  #代表外循环要执行5次
 		print(j,end='/t')
 	print()
 	
-	
+'''
 #45.为什么需要列表
+'''
+a = 10 #变量存储的是一个对象的引用
+lst = ['hello','world',99]
+print(id(lst))
+print(type(lst))
+print(lst)
+'''
+#46.列表对象的创建
+'''第一种，使用[]'''
+li=['hello','eorld']
+'''第二种，使用内置函数list()
+li2=list(['hello','world',98])
+print(li2)
+'''
+
+#47.列表特点
+'''
+列表中的元素按照顺序有序排列
+索引映射唯一的数据
+可以存储重复数据
+任意数据类型混存
+根据需要动态分配和回收内存
+'''
+
+#48.获取指定元素的索引
+'''
+lst=['hello','world']
+print(lst.index('hello'))#如果列表中有相同的元素，只返回列表中相同元素的第一个元素的索引
+print(lst.index('Python'))#ValueError: 'Python' is not in list
+print(lst.index('hello',1,3))#ValueError: 'Python' is not in list
+print(lst.index('hello',1,4))
+'''
+
+#49.获取列表中的单个元素
+
+'''
+lst1=['hello','world',98,234,'nihao']
+#获取索引为2的元素
+print(lst1[2])
+print(lst1[-3])
+'''
+
+#50.获取列表中的多个元素_切片操作
+lst=[10,20,30,40,50,60,70,80]
+#start=1.stop=6,step1
+print(lst[1:6:1])
+print('源列表',id(lst))
+lst2=lst[1:6:1]
+print('切的片段：',id(lst2))
+print(lst[1:6])
+print(lst[1:6:])
+print(lst[1:6:2])

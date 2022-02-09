@@ -399,7 +399,7 @@ print(stu._Student__age)#在类的外部可以使用_Student__age进行访问
 2.如果一个类没有继承任何类，则默认继承object
 3.python支持多继承
 4.定义子类时，必须在其构造函数中调用父类的构造函数
-'''
+
 class Person(object):
 	def __init__(self,name,age):
 		self.name = name
@@ -417,13 +417,13 @@ class Teacher(Student):
 	def __init__(self,name,age,teacherfyear):
 		super().__init__(name,age)
 		self.teacherfyear=teacherfyear
-'''
+
 stu=Student('李四',20,100)
 tea=Teacher('李四',20,10)
 
 stu.info()
 tea.info()
-'''
+
 stude = Student('jack',22,1)
 tea = Teacher('Tom',12,22)
 stude.info()
@@ -436,4 +436,236 @@ class B(object):
 	pass
 
 class C(A,B):
+	pass'''
+#113.方法重写
+'''
+1.如果子类对继承自父类的某个属性或方法不满意，可以在子类中对其进行重新编写
+2.子类重写后的方法中可以通过super().xxx()调用父类中被重写的方法
+class Person(object):
+	def __init__(self, name, age):
+		self.name = name
+		self.age = age
+	
+	def info(self):
+		print(self.name, self.age)
+
+
+class Student(Person):
+	def __init__(self, name, age, stuno):
+		super().__init__(name, age)
+		self.stu_no = stuno
+	def info(self):
+		super().info()
+		print(self.stuno)
+
+
+class Teacher(Student):
+	def __init__(self, name, age, teacherfyear):
+		super().__init__(name,age)
+		self.teacherfyear = teacherfyear
+
+
+stu = Student('李四', 20, 100)
+tea = Teacher('李四', 20, 10)
+
+stu.info()
+print('---------------')
+tea.info()'''
+#114.OBJECT类
+'''
+1.object类时所以类的父类，因此所以类都有object类的属性和方法
+2.内置函数dir（）可以查看指定对象所有的属性
+3.object有一个__str__()方法，用于返回一个对于对象的描述，对于内置函数str()经常用于print()方法
+帮我们查看对象的信息，所以我们经常会对__str__()进行重写
+
+class Student:
+	def __init__(self,name,age):
+		self.name=name
+		self.age=age
+		
+	def __str__(self):
+		return '我的名字是{0}，今年{1}岁'.format(self.name,self.age)
+
+stu=Student('张三',20)
+print(dir(stu))
+print(stu)   #默认会调用__str__方法
+print(type(stu))'''
+
+#115.多态的实现
+'''
+简单来说，就是：具备多种形态，指的是：即便不知道一个变量所引用的对象到底是什么类型，
+仍然可以通过这个变量调用方法吗，在运行过程中，根据变量引用对象的类型，动态决定调用哪个对象的方法
+
+静态语言和动态语言
+class Animal(object):
+	def eat(self):
+		print('动物会吃')
+class Dog(object):
+	def eat(self):
+		print('狗吃骨头')
+class Cat(Animal):
+	def eat(self):
+		print('猫吃鱼')
+		
+class Person:
+	def eat(self):
+		print('人吃五谷杂粮')
+		
+#定义一个函数
+def fun(obj):
+	obj.eat()
+	
+#开始调用
+fun(Cat())
+fun(Dog())
+fun(Animal())
+fun(Person())
+'''
+
+#116.特殊属性和特殊方法
+'''
+特殊属性：__dict__获得类对象或实例对象锁绑定所以属性和方法的字典
+特殊方法：
+__len__通过重写，让内置函数len()参数可以是自定义类型
+__add__通过重写，可使用自定义对象具有+给你
+__new__用于创建对象
+__init__对创建对象进行初始化
+class A:
 	pass
+class B:
+	pass
+class C(A,B):
+	def __init__(self,name,age):
+		self.name = name
+		self.age = age
+#创建C类对象
+x=C('jack',20)
+print(x.__dict__)  #实例对象的属性字典
+print(C.__dict__)
+
+print(x.__class__)  #输出对象所属的类
+print(C.__bases__)  #C类的父类类型的元素
+print(C.__base__)   #
+print(C.__mro__)    #类的层次结构
+print(C.__subclasses__())'''
+
+#117.特殊方法
+'''
+a=20
+b=30
+c=a+b #两个整数类型相加操作
+d=a.__add__(b)
+
+print(c)
+print(d)
+
+class Student:
+	def __init__(self,name):
+		self.name = name
+	def __add__(self, other):
+		return self.name+other.name
+	def __len__(self):
+		return len(self.name)
+
+stu1=Student('dddd')
+stu2=Student('李四')
+
+s=stu1+stu2 #实现两个对象加法运算__add__
+print(s)
+print('-----------------')
+lst=[11,22,33]
+print(len(lst))  #len是内置函数，输出对象长度，
+print(lst.__len__())
+print(len(stu1))
+'''
+
+#118.__new__与__init__演示创建对象的过程
+'''
+class Person(object):
+	def __init__(self,name,age):
+		self.name = name
+		self.age = age
+		
+	def __new__(cls, *args, **kwargs):
+		print('__new__被调用执行了，cls的id值为{0}'.format(id(cls)))
+		super().__new__(cls)
+		obj=super().__new__(cls)
+		print('创建的对象id为：{0}'.format(id(obj)))
+		return obj
+
+	def __init__(self,name,age):
+		print('__init__被调用了，self的id值为：{0}'.format(id(self)))
+		self.name =name
+		self.age = age
+
+print('object这个类对象的id为:{0}'.format(id(object)))
+print('Person这个类对象的id为:{0}'.format(id(Person)))
+
+#创建Person类的实例对象
+p1=Person('张三',20)
+print('p1这个Person类的实例对象的id:{0}'.format(id(p1)))
+'''
+
+#119.类的赋值和拷贝
+'''
+变量赋值操作：只是形参两个变量，实际桑还是指向同一个对象
+浅拷贝：Python一般是浅拷贝，拷贝是对象包含子对象内容不拷贝马，因此，源对象与拷贝对象会引用同一个子对象
+深拷贝：使用copy模块的deepcopy函数，递归拷贝对象中包含子对象，源对象和拷贝对象所以的子对象也不相同
+
+class CPU:
+	pass
+class Disk:
+	pass
+class Cpmputer:
+	def __init__(self,CPU,Disk):
+		self.CPU=CPU
+		self.Disk=Disk
+#1.变的赋值
+cpu1=CPU()
+cpu2=cpu1
+print(cpu1,id(cpu1))
+print(cpu2,id(cpu2))
+#2.类有浅拷贝
+dick=Disk()  #创建一个硬盘类的对象
+computer=Cpmputer(cpu1,dick)  #创建一个计算机类的对象
+
+#浅拷贝
+import copy
+computer2=copy.copy(computer)
+print(computer,computer.CPU,computer.Disk)
+print(computer2,computer2.CPU,computer.Disk)
+'''
+
+#120.深拷贝
+'''
+浅拷贝，只拷贝id
+深拷贝，全部拷贝
+class CPU:
+	pass
+class Disk:
+	pass
+class Cpmputer:
+	def __init__(self,CPU,Disk):
+		self.CPU=CPU
+		self.Disk=Disk
+#1.变的赋值
+cpu1=CPU()
+cpu2=cpu1
+print(cpu1,id(cpu1))
+print(cpu2,id(cpu2))
+#2.类有浅拷贝
+dick=Disk()  #创建一个硬盘类的对象
+computer=Cpmputer(cpu1,dick)  #创建一个计算机类的对象
+
+#浅拷贝
+print('-----浅拷贝-----')
+import copy
+computer2=copy.copy(computer)
+print(computer,computer.CPU,computer.Disk)
+print(computer2,computer2.CPU,computer.Disk)
+
+#深拷贝
+print('-----深拷贝-----')
+computer3=copy.deepcopy(computer)
+print(computer,computer.CPU,computer.Disk)
+print(computer3,computer3.CPU,computer3.Disk)'''
